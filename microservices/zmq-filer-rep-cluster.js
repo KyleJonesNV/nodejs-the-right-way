@@ -24,6 +24,13 @@ if (cluster.isPrimary) {
     console.log(`Worker ${worker.process.pid} is online`)
   })
 
+  // Listen for workers exiting / killed
+  cluster.on('exit', (worker) => {
+    console.log(`Worker ${worker.process.pid} has exited`)
+    console.log('Forking a new worker...')
+    cluster.fork()
+  })
+
   // Fork a worker process for each CPU.
   for (let i = 0; i < numWorkers; i++) {
     cluster.fork()
