@@ -17,5 +17,6 @@ describe('parseRDF', () => {
     expect(book).to.have.a.property('title', 'The Art of War')
     expect(book).to.have.a.property('authors').that.is.an('array').with.length(2).and.contains('Giles, Lionel').and.contains('Giles, Lionel')
     expect(book).to.have.a.property('subjects').that.is.an('array').with.length(2).and.contain('Military art and science -- Early works to 1800').and.contains('War -- Early works to 1800')
+    expect(book).to.have.a.property('lcc').that.is.a('string').with.length(1).and.equals('U')
   })
 })

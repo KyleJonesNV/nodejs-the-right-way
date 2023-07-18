@@ -21,5 +21,11 @@ module.exports = (rdf) => {
     .toArray()
     .map((element) => $(element).text())
 
+  // Extract LCC field
+  book.lcc = $('[rdf\\:resource$="/LCC"]')
+    .parent()
+    .find('rdf\\:value')
+    .text()
+
   return book
 }
