@@ -3,3 +3,5 @@ cache/
 *.tar.bz2
 
 bulk_pg.ldj
+
+bulk_result.json
