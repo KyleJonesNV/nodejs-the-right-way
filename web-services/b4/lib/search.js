@@ -5,6 +5,7 @@
 'use strict'
 
 const request = require('request')
+const fetch = require('node-fetch')
 
 require('dotenv').config()
 
@@ -100,10 +101,49 @@ module.exports = (app, es) => {
 
     promise
       .then((esResBody) => {
-        res.status(200).json(esResBody)
+        res.status(200).json(esResBody.suggest.suggestions)
       })
-      .catch(({error}) => {
+      .catch(({ error }) => {
         res.status(error.status || 502).json(error)
       })
+  })
+
+  /**
+   * Collect suggested terms for a given field based on a given query
+   * Equivalent using node fetch since request is deprecated
+   */
+  app.get('/api/nf/suggest/books/:field/:query', async (req, res) => {
+    const url = `https://${es.host}:${es.port}/${es.books_index}/_search`
+
+    const esReqBody = {
+      size: 10,
+      suggest: {
+        text: req.params.query,
+        suggestions: {
+          term: {
+            field: req.params.field,
+            suggest_mode: 'always',
+          },
+        },
+      },
+    }
+
+    const user_password = process.env.ELASTIC_USER + ':' + process.env.ELASTIC_PASS
+    const auth = btoa(user_password)
+    try {
+      const result = await fetch(url, {
+        method: 'POST',
+        body: JSON.stringify(esReqBody),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Basic ${auth}`,
+        },
+      })
+  
+      const data = await result.json();    
+      res.status(200).json(data)
+    } catch (error) {
+      res.status(502).json(error)
+    }
   })
 }
