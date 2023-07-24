@@ -11,13 +11,17 @@ module.exports = {
     path: distDir,
   },
   devServer: {
-    static: path.join(__dirname, "dist"),
+    static: path.join(__dirname, 'dist'),
     port: 60800,
+    proxy: {
+      '/api': 'http://localhost:60702',
+      '/es': {
+        target: 'https://localhost:9200',
+        pathRewrite: { '^/es': '' },
+      },
+    },
   },
-  plugins: [
-    new HtmlWebpackPlugin({ title: 'Better Book Bundle Builder' }), 
-    new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery' })
-  ],
+  plugins: [new HtmlWebpackPlugin({ title: 'Better Book Bundle Builder' }), new webpack.ProvidePlugin({ $: 'jquery', jQuery: 'jquery' })],
   module: {
     rules: [
       { test: /\.ts$/, use: ['ts-loader'] },

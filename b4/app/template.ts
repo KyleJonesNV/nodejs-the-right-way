@@ -1,11 +1,20 @@
 import * as Handlebars from '../node_modules/handlebars/dist/handlebars.js'
 
 export const main = Handlebars.compile(`
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#welcome">B4</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            </div>
+        </div>
+    </nav>
     <div class="container">
-        <h1>B4 - Book Bundler</h1>
         <div class="b4-alerts"></div>
         <div class="b4-main"></div>
-    <div>    
+    </div>    
 `)
 
 export const welcome = Handlebars.compile(`
