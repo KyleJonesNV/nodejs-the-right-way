@@ -21,7 +21,7 @@ const app = express()
 
 app.use(morgan('dev'))
 
-app.get('api/version', (req, res) => {
+app.get('/api/version', (req, res) => {
     res.status(200).send(pkg.version)
 })
 

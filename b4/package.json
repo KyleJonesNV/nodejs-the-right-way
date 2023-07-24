@@ -1,0 +1,35 @@
+{
+  "name": "b4-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon --ignore './sessions' server.js",
+    "build": "webpack"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {    
+    "express": "^4.18.2",    
+    "morgan": "^1.10.0",
+    "nconf": "^0.12.0",
+    "node-fetch": "^3.3.1",
+    "nodemon": "^3.0.1"
+  },
+  "devDependencies": {
+    "bootstrap": "^5.3.0",
+    "handlebars": "^4.7.7",
+    "html-webpack-plugin": "^5.5.3",
+    "jquery": "^3.7.0",
+    "typescript": "^5.1.6",
+    "webpack": "^5.88.2",
+    "webpack-dev-middleware": "^6.1.1",
+    "style-loader": "^3.3.3",
+    "ts-loader": "^9.4.4",
+    "url-loader": "^4.1.1",
+    "file-loader": "^6.2.0",
+    "css-loader": "^6.8.1"
+  }
+}
